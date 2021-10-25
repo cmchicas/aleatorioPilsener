@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible"
+        content="IE=edge">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <title>Aleatorio</title>
+  <style type="text/css">
+    @import url(https://fonts.googleapis.com/css?family=Exo+2:400,900);
+
+    html {
+      height: 100%;
+      background-size: cover;
+    }
+
+    body {
+      font-family: "Exo 2", sans-serif;
+      background-image: url("https://image.email.ab-inbev.com/lib/fe2611717d64047f7c1d77/m/1/3d11b2c0-13de-48cc-a820-52eb99b2966f.png");
+      background-size: cover;
+    }
+
+    .generate {
+      /* Remove button styles */
+      border: none;
+      background: transparent;
+      outline: none;
+      overflow: none;
+      /* Make 'clickable' */
+      cursor: pointer;
+    }
+
+    .number {
+      text-shadow: 0 0 5px #bbb;
+      /* Make it big */
+      font-weight: 900;
+      font-size: 250px;
+      color: white;
+      /* Center it */
+      width: 50%;
+      min-height: 50%;
+      overflow: auto;
+      margin: auto;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+
+    .options {
+      background-color: #555;
+      border-radius: 5px;
+      color: #efefef;
+      padding: 10px 20px;
+      position: absolute;
+      cursor: pointer;
+      display: none;
+    }
+
+    .options input,
+    .options label {
+      display: none;
+    }
+
+    .options:hover input,
+    .options:hover label {
+      display: inline;
+    }
+
+    .options input {
+      background-color: #efefef;
+      padding: 10px;
+      margin: 5px 15px;
+    }
+
+    .textoAleatorio {
+      text-align: center;
+      margin: 0 auto;
+      color: white;
+      font-size: 4rem;  
+    }
+  </style>
+</head>
+
+<body>
+  <form class="options">
+    <legend>Options</legend>
+    
+    <label for="min">Min</label>
+    <input type="number"
+    value="0"
+    id="min"
+    name="min">
+    
+    <label for="max">Max</label>
+    <input type="number"
+    value="10"
+    id="max"
+    name="max">
+  </form>
+  <div class="textoAleatorio">
+    <h2>SELECIONAR GANADOR</h2>
+    <button class="generate number">?</button>
+  </div>
+</body>
+
+
+<script>
+  /**
+* This object generates a random number
+*/
+  var generator = {
+    min: 1,
+    max: 150,
+
+    /**
+     * Generate a random number
+     */
+    getRandom: function () {
+      return Math.round(Math.random() * (this.max - this.min) + this.min);
+    },
+
+    /**
+     * Set the lower number boundry
+     */
+    setMin: function (newMin) {
+      this.min = parseInt(newMin);
+    },
+
+    /**
+     * Set the higher number boundry
+     */
+    setMax: function (newMax) {
+      this.max = parseInt(newMax);
+    }
+  };
+
+  var number = document.querySelector('.number');
+
+  document.querySelector('.generate').onclick = function () {
+    number.textContent = generator.getRandom();
+  };
+
+  var options = document.querySelector('.options');
+
+  options.querySelector('#min').onchange = function () {
+    generator.setMin(this.value);
+  };
+
+  options.querySelector('#max').onchange = function () {
+    generator.setMax(this.value);
+  };
+
+</script>
+
+</html>
